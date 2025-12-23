@@ -1,0 +1,59 @@
+# AWS Deployment Checklist for FastAPI DynamoDB App
+
+## Pre-Deployment
+- [ ] AWS Account created
+- [ ] AWS CLI installed and configured
+- [ ] Docker Desktop running
+- [ ] Application tested locally
+
+## AWS Resources Setup
+- [ ] DynamoDB table "Users" created with "user_id" as partition key
+- [ ] ECR repository created
+- [ ] Secrets Manager secret created for credentials
+- [ ] IAM roles created (ecsTaskExecutionRole, ecsTaskRole)
+- [ ] CloudWatch log group created
+
+## Docker Image
+- [ ] Docker image built successfully
+- [ ] Docker image tagged with ECR URI
+- [ ] Docker image pushed to ECR
+- [ ] Image URI noted: <ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/fastapi-dynamodb-app:latest
+
+## ECS Configuration
+- [ ] ECS Cluster created
+- [ ] Task definition registered
+- [ ] Security group created (allow port 8000)
+- [ ] VPC and subnets configured
+- [ ] Application Load Balancer created (optional)
+- [ ] Target group created pointing to port 8000
+- [ ] ECS Service created
+- [ ] Tasks running successfully
+
+## Post-Deployment
+- [ ] Health check endpoint accessible
+- [ ] API endpoints tested
+- [ ] CloudWatch logs verified
+- [ ] Monitor for errors
+- [ ] Set up CloudWatch alarms (optional)
+- [ ] Configure auto-scaling (optional)
+
+## Security Best Practices
+- [ ] Use Secrets Manager instead of hardcoded credentials
+- [ ] Enable VPC endpoints for DynamoDB (cost optimization)
+- [ ] Configure security groups properly
+- [ ] Enable CloudWatch Container Insights
+- [ ] Set up AWS WAF for API protection (optional)
+- [ ] Enable API Gateway throttling (if using API Gateway)
+
+## Cost Optimization
+- [ ] Use Fargate Spot for non-production (50-70% savings)
+- [ ] Set up auto-scaling based on CPU/memory
+- [ ] Enable DynamoDB on-demand pricing or provisioned with auto-scaling
+- [ ] Use VPC endpoints to avoid NAT Gateway costs
+- [ ] Set up CloudWatch alarms for budget alerts
+
+## Monitoring
+- [ ] CloudWatch dashboard created
+- [ ] Alarms set for errors
+- [ ] X-Ray tracing enabled (optional)
+- [ ] Log retention policy set
